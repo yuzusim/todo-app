@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { theme } from "./colors.js";
 
 export default function App() {
@@ -8,8 +8,12 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.header}>
-        <Text style={styles.btnText}>Work</Text>
-        <Text style={styles.btnText}>Travel</Text>
+        <TouchableOpacity>
+          <Text style={styles.btnText}>Work</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.btnText}>Travel</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
