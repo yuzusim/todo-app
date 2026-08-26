@@ -1,6 +1,14 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Pressable,
+} from "react-native";
 import { theme } from "./colors.js";
 
 export default function App() {
@@ -33,8 +41,9 @@ const styles = StyleSheet.create({
     // backgroundColor: "blue",
   },
   btnText: {
-    color: theme.grey,
     fontSize: 38,
     fontWeight: "600",
+    color: "white",
+    // color: theme.grey,
   },
 });
