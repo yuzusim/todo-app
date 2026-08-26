@@ -44,6 +44,5 @@ const styles = StyleSheet.create({
     fontSize: 38,
     fontWeight: "600",
     color: "white",
-    // color: theme.grey,
   },
 });
