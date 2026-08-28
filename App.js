@@ -12,15 +12,30 @@ import {
 import { theme } from "./colors.js";
 
 export default function App() {
+  const [working, setWorking] = React.useState(true);
+  const travel = () => setWorking(false);
+  const work = () => setWorking(true);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.header}>
-        <TouchableOpacity>
-          <Text style={styles.btnText}>Work</Text>
+        <TouchableOpacity onPress={work}>
+          <Text
+            style={{ ...styles.btnText, color: working ? "white" : theme.grey }}
+          >
+            Work
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.btnText}>Travel</Text>
+        <TouchableOpacity onPress={travel}>
+          <Text
+            style={{
+              ...styles.btnText,
+              color: !working ? "white" : theme.grey,
+            }}
+          >
+            Travel
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -38,11 +53,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 100,
-    // backgroundColor: "blue",
   },
   btnText: {
     fontSize: 38,
     fontWeight: "600",
-    color: "white",
   },
 });
