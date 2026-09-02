@@ -5,9 +5,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-  Pressable,
+  TextInput,
 } from "react-native";
 import { theme } from "./colors.js";
 
@@ -38,6 +36,12 @@ export default function App() {
           </Text>
         </TouchableOpacity>
       </View>
+      <View>
+        <TextInput
+          style={styles.input}
+          placeholder={working ? "Add a To Do" : "Where do you want to go?"}
+        />
+      </View>
     </View>
   );
 }
@@ -57,5 +61,14 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: 38,
     fontWeight: "600",
+  },
+  input: {
+    backgroundColor: theme.grey,
+    color: "white",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 30,
+    marginTop: 20,
+    fontSize: 18,
   },
 });
