@@ -38,6 +38,7 @@ export default function App() {
       </View>
       <View>
         <TextInput
+          keyboardType="phone-pad"
           style={styles.input}
           placeholder={working ? "Add a To Do" : "Where do you want to go?"}
         />
