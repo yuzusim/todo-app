@@ -11,8 +11,10 @@ import { theme } from "./colors.js";
 
 export default function App() {
   const [working, setWorking] = React.useState(true);
+  const [text, setText] = React.useState("");
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
+  const onChangeText = (payload) => setText(payload);
 
   return (
     <View style={styles.container}>
@@ -38,7 +40,8 @@ export default function App() {
       </View>
       <View>
         <TextInput
-          keyboardType="phone-pad"
+          onChangeText={onChangeText}
+          value={text}
           style={styles.input}
           placeholder={working ? "Add a To Do" : "Where do you want to go?"}
         />
