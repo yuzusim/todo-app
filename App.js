@@ -10,11 +10,44 @@ import {
 import { theme } from "./colors.js";
 
 export default function App() {
+  // 현재 Work인지 Travel인지 저장
   const [working, setWorking] = React.useState(true);
+
+  // TextInput에 입력한 내용을 저장
   const [text, setText] = React.useState("");
+
+  const [toDos, setToDos] = React.useState({});
+
+  // Travel 버튼을 누르면 working을 false로 변경
   const travel = () => setWorking(false);
+
+  // Work 버튼을 누르면 working을 true로 변경
   const work = () => setWorking(true);
+
+  // TextInput에 입력할 때마다 입력값을 text에 저장
   const onChangeText = (payload) => setText(payload);
+
+  // 키보드의 완료 버튼을 누르면 실행
+  const addToDo = () => {
+    // 입력값이 비어 있으면 함수 종료
+    if (text === "") {
+      return;
+    }
+
+    // 절대 state를 직접 수정하면 안됨
+    // 기존 Todo에 새 Todo를 하나 추가해서 새로운 state로 저장
+    const newToDos = Object.assign({}, toDos, {
+      // Date.now()를 key로 사용해서 고유한 key 생성
+      [Date.now()]: { text, work: working },
+    });
+
+    // 새로운 Todo 목록을 state에 저장
+    setToDos(newToDos);
+
+    // 저장 후 입력창을 비움
+    setText("");
+  };
+  console.log(toDos);
 
   return (
     <View style={styles.container}>
@@ -38,14 +71,20 @@ export default function App() {
           </Text>
         </TouchableOpacity>
       </View>
-      <View>
-        <TextInput
-          onChangeText={onChangeText}
-          value={text}
-          style={styles.input}
-          placeholder={working ? "Add a To Do" : "Where do you want to go?"}
-        />
-      </View>
+
+      <TextInput
+        // 완료 버튼을 누르면 addToDo 실행
+        onSubmitEditing={addToDo}
+        // 글자를 입력할 때마다 onChangeText 실행
+        onChangeText={onChangeText}
+        // 키보드의 Enter 버튼을 "완료"로 표시
+        returnKeyType="done"
+        // text state와 입력창을 연결
+        value={text}
+        style={styles.input}
+        // Work / Travel에 따라 placeholder 변경
+        placeholder={working ? "Add a To Do" : "Where do you want to go?"}
+      />
     </View>
   );
 }
