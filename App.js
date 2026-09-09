@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from "react-native";
 import { theme } from "./colors.js";
 
@@ -35,11 +36,13 @@ export default function App() {
     }
 
     // 절대 state를 직접 수정하면 안됨
-    // 기존 Todo에 새 Todo를 하나 추가해서 새로운 state로 저장
-    const newToDos = Object.assign({}, toDos, {
-      // Date.now()를 key로 사용해서 고유한 key 생성
+    // 기존 Todo에 새 Todo를 추가해서 새로운 객체 생성
+    const newToDos = {
+      ...toDos,
+
+      // Date.now()를 Todo의 고유한 key로 사용
       [Date.now()]: { text, work: working },
-    });
+    };
 
     // 새로운 Todo 목록을 state에 저장
     setToDos(newToDos);
@@ -85,6 +88,18 @@ export default function App() {
         // Work / Travel에 따라 placeholder 변경
         placeholder={working ? "Add a To Do" : "Where do you want to go?"}
       />
+
+      {/* Todo 목록을 스크롤할 수 있게 함 */}
+      <ScrollView>
+        {/* toDos의 key들을 가져와 하나씩 화면에 표시 */}
+        {Object.keys(toDos).map((key) => (
+          // Todo 하나를 감싸는 View
+          <View style={styles.toDo} key={key}>
+            {/* 해당 key의 Todo text를 화면에 표시 */}
+            <Text style={styles.toDoText}>{toDos[key].text}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -111,7 +126,19 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 30,
-    marginTop: 20,
+    marginVertical: 20,
     fontSize: 18,
+  },
+  toDo: {
+    backgroundColor: theme.toDoBg,
+    marginBottom: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 40,
+    borderRadius: 15,
+  },
+  toDoText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "500",
   },
 });
